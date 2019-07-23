@@ -16,4 +16,14 @@
         android:layout_marginBottom="355dp"
         android:text="@string/start_activity"
         android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/reg_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="129dp"
+        android:layout_marginBottom="259dp"
+        android:text="@string/create_account" />
 </RelativeLayout>

@@ -2,4 +2,5 @@
     <string name="app_name">chat</string>
     <string name="welcome">Welcome</string>
     <string name="start_activity">Start Activity</string>
+    <string name="create_account">Create account</string>
 </resources>
