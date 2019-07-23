@@ -3,4 +3,9 @@
     <string name="welcome">Welcome</string>
     <string name="start_activity">Start Activity</string>
     <string name="create_account">Create account</string>
+    <string name="registration">Registration</string>
+    <string name="nameHint">Name</string>
+    <string name="emailHint">Email</string>
+    <string name="passwordHint">Password</string>
+    <string name="createAccountBtn">Create account</string>
 </resources>
