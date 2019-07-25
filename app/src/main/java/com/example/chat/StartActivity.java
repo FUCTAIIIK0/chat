@@ -11,21 +11,32 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class StartActivity extends AppCompatActivity {
-    private Button mRegBtn;
+    private Button regBtn,loginBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        mRegBtn =findViewById(R.id.reg_btn);
-        mRegBtn.setOnClickListener(new View.OnClickListener() {
+        regBtn =findViewById(R.id.reg_btn);
+        regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent regIntent = new Intent(StartActivity.this,RegisterActivity.class);
                 startActivity(regIntent);
             }
         });
+
+        loginBtn =findViewById(R.id.login_btn);
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent loginIntent = new Intent(StartActivity.this,LoginActivity.class);
+                startActivity(loginIntent);
+            }
+        });
+
 
 
     }
