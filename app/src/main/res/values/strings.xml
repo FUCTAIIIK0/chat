@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">chat</string>
-    <string name="welcome">Welcome</string>
+    <string name="welcome">Main Page</string>
     <string name="start_activity">Start Activity</string>
     <string name="create_account">Create account</string>
     <string name="registration">Registration</string>
@@ -8,4 +8,8 @@
     <string name="emailHint">Email</string>
     <string name="passwordHint">Password</string>
     <string name="createAccountBtn">Create account</string>
+    <string name="log_out">Log out</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="all_users_btn">All Users</string>
+    <string name="account_settings_btn">Account Settings</string>
 </resources>
