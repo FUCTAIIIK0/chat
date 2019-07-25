@@ -12,4 +12,6 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="all_users_btn">All Users</string>
     <string name="account_settings_btn">Account Settings</string>
+    <string name="loginText">Login</string>
+    <string name="loginBtn">Login</string>
 </resources>
