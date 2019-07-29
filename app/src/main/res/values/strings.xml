@@ -17,4 +17,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_status">Life, the Universe and Everything</string>
+    <string name="display_name">Display Name</string>
+    <string name="change_image_Btn">Change Image</string>
+    <string name="change_status_Btn">Change Status</string>
 </resources>
