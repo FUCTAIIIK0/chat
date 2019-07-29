@@ -94,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
              //Log.d("Menu", "All users "+FirebaseAuth.getInstance().getCurrentUser().getDisplayName().toString());
          }
          if (item.getItemId() == R.id.mainSettingsBtn){
+             Intent settingsIntent = new Intent(MainActivity.this,SettingsActivity.class);
+             startActivity(settingsIntent);
 
          }
 
