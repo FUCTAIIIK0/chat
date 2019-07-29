@@ -9,13 +9,18 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Toolbar mToolbar;
+    private ViewPager mViewPager;
+    private SectionPagerAdapter mSectionPagerAdapter;
+    private TabLayout mTabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +32,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Layout
-        mToolbar = findViewById(R.id.mainPageToolbar);
+        mToolbar = findViewById(R.id.main_PageToolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("My Chat Main Page");
+        //Layout tabs
+        mViewPager = findViewById(R.id.main_tabPager);
+        mSectionPagerAdapter = new SectionPagerAdapter(getSupportFragmentManager());
 
-        //Layout
+        mViewPager.setAdapter(mSectionPagerAdapter);
 
+        mTabLayout = findViewById(R.id.main_tabs);
+        mTabLayout.setupWithViewPager(mViewPager);
 
 
 
