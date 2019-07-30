@@ -40,8 +40,11 @@ public class StatusActivity extends AppCompatActivity {
         String currentUID = currentUser.getUid();
         mStatusDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUID);
 
+        String status_value = getIntent().getStringExtra("status_value");
+
         //Layout
         mStatusEditText = findViewById(R.id.status_editText);
+        mStatusEditText.getEditText().setText(status_value);
         mSaveBtn = findViewById(R.id.status_saveBtn);
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -40,7 +40,9 @@ public class SettingsActivity extends AppCompatActivity {
         statusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String status_value = mStatus.getText().toString();
                 Intent statusIntent = new Intent(SettingsActivity.this,StatusActivity.class);
+                statusIntent.putExtra("status_value",status_value);
                 startActivity(statusIntent);
             }
         });
@@ -73,11 +75,11 @@ public class SettingsActivity extends AppCompatActivity {
                 mName.setText(name);
                 mStatus.setText(status);
 
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
         //Database
