@@ -28,6 +28,8 @@ public class SettingsActivity extends AppCompatActivity {
     private DatabaseReference mUserDatabase;
     private FirebaseUser mCurrentUser;
 
+    private static final int GALLERY_PICK = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,17 @@ public class SettingsActivity extends AppCompatActivity {
                 Intent statusIntent = new Intent(SettingsActivity.this,StatusActivity.class);
                 statusIntent.putExtra("status_value",status_value);
                 startActivity(statusIntent);
+            }
+        });
+        imageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent galleryIntent = new Intent();
+                galleryIntent.setType("image/*");
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"),GALLERY_PICK);
+
             }
         });
 
