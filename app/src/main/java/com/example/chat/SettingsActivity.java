@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,6 +43,8 @@ public class SettingsActivity extends AppCompatActivity {
     private static final int GALLERY_PICK = 1;
     //Storage
     private StorageReference mImageStorage;
+    //Progress
+    private ProgressDialog mProgressDialog;
 
 
 
@@ -128,6 +131,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GALLERY_PICK && resultCode == RESULT_OK) {
 
+            String current_user_id = mCurrentUser.getUid();
 
             Uri imageURI = data.getData();
 
@@ -138,18 +142,40 @@ public class SettingsActivity extends AppCompatActivity {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
+
+                mProgressDialog = new ProgressDialog(SettingsActivity.this);
+                mProgressDialog.setTitle("Uploading image...");
+                mProgressDialog.setMessage("Please wait while we upload the image");
+                mProgressDialog.setCanceledOnTouchOutside(false);
+                mProgressDialog.show();
+
                 Uri resultUri = result.getUri();
 
                 String current_uid = mCurrentUser.getUid();
 
-                StorageReference filepath = mImageStorage.child("profile_images").child(random()+".jpg");
+                StorageReference filepath = mImageStorage.child("profile_images").child(current_uid+".jpg");
 
                 filepath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(SettingsActivity.this,"Working",Toast.LENGTH_LONG).show();
+                            //maybe .getDownloadUri
+                            String download_url = task.getResult().getUploadSessionUri().toString();
+                            mUserDatabase.child("image").setValue(download_url).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        mProgressDialog.dismiss();
+                                        Toast.makeText(SettingsActivity.this,"Uploading Success",Toast.LENGTH_LONG).show();
+                                    }else {
+                                        mProgressDialog.hide();
+                                        Toast.makeText(SettingsActivity.this,"Uploading Error",Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+
                         }else {
+                            mProgressDialog.dismiss();
                             Toast.makeText(SettingsActivity.this,"Uploading Error",Toast.LENGTH_LONG).show();
                         }
 
