@@ -27,6 +27,8 @@ import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.util.Random;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -40,6 +42,7 @@ public class SettingsActivity extends AppCompatActivity {
     private static final int GALLERY_PICK = 1;
     //Storage
     private StorageReference mImageStorage;
+
 
 
     @Override
@@ -136,7 +139,7 @@ public class SettingsActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
 
-                StorageReference filepath = mImageStorage.child("profile_images").child("profile_image.jpg");
+                StorageReference filepath = mImageStorage.child("profile_images").child(random()+".jpg");
 
                 filepath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -154,5 +157,17 @@ public class SettingsActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    public static String random() {
+        Random generator = new Random();
+        StringBuilder randomStringBuilder = new StringBuilder();
+        int randomLength = generator.nextInt(10);
+        char tempChar;
+        for (int i = 0; i < randomLength; i++){
+            tempChar = (char) (generator.nextInt(96) + 32);
+            randomStringBuilder.append(tempChar);
+        }
+        return randomStringBuilder.toString();
     }
 }
