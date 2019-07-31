@@ -70,15 +70,16 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                Intent galleryIntent = new Intent();
+/*                Intent galleryIntent = new Intent();
                 galleryIntent.setType("image/*");
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
 
-                startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"), GALLERY_PICK);
+                startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"), GALLERY_PICK);*/
 
-/*                CropImage.activity()
+                CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
-                        .start(SettingsActivity.this);*/
+                        .setAspectRatio(1,1)
+                        .start(SettingsActivity.this);
 
             }
         });
@@ -139,6 +140,8 @@ public class SettingsActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
 
+                String current_uid = mCurrentUser.getUid();
+
                 StorageReference filepath = mImageStorage.child("profile_images").child(random()+".jpg");
 
                 filepath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
@@ -158,11 +161,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         }
     }
-
+    //Storage file name generation
     public static String random() {
         Random generator = new Random();
         StringBuilder randomStringBuilder = new StringBuilder();
-        int randomLength = generator.nextInt(10);
+        int randomLength = generator.nextInt(20);
         char tempChar;
         for (int i = 0; i < randomLength; i++){
             tempChar = (char) (generator.nextInt(96) + 32);
