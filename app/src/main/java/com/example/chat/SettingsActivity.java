@@ -27,7 +27,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SettingsActivity extends AppCompatActivity {
     //Layout
     private CircleImageView mImage;
-    private Button imageBtn,statusBtn;
+    private Button imageBtn, statusBtn;
     private TextView mName, mStatus;
     //Database
     private DatabaseReference mUserDatabase;
@@ -48,8 +48,8 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String status_value = mStatus.getText().toString();
-                Intent statusIntent = new Intent(SettingsActivity.this,StatusActivity.class);
-                statusIntent.putExtra("status_value",status_value);
+                Intent statusIntent = new Intent(SettingsActivity.this, StatusActivity.class);
+                statusIntent.putExtra("status_value", status_value);
                 startActivity(statusIntent);
             }
         });
@@ -62,7 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
                 galleryIntent.setType("image/*");
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
 
-                startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"),GALLERY_PICK);
+                startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"), GALLERY_PICK);
 
 /*                CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
@@ -83,16 +83,16 @@ public class SettingsActivity extends AppCompatActivity {
                 String image = "null";
                 String status = "null";
                 String thumb_image = "null";
-                if (dataSnapshot.child("name").getValue() != null){
-                     name = dataSnapshot.child("name").getValue().toString();
+                if (dataSnapshot.child("name").getValue() != null) {
+                    name = dataSnapshot.child("name").getValue().toString();
                 }
-                if (dataSnapshot.child("image").getValue() != null){
+                if (dataSnapshot.child("image").getValue() != null) {
                     image = dataSnapshot.child("image").getValue().toString();
                 }
-                if (dataSnapshot.child("status").getValue() != null){
+                if (dataSnapshot.child("status").getValue() != null) {
                     status = dataSnapshot.child("status").getValue().toString();
                 }
-                if (dataSnapshot.child("thumb_image").getValue() != null){
+                if (dataSnapshot.child("thumb_image").getValue() != null) {
                     thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
                 }
 
@@ -113,18 +113,27 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GALLERY_PICK && resultCode == RESULT_OK){
-
+        if (requestCode == GALLERY_PICK && resultCode == RESULT_OK) {
 
 
             Uri imageURI = data.getData();
 
             CropImage.activity(imageURI)
-                    .setAspectRatio(1,1)
+                    .setAspectRatio(1, 1)
                     .start(this);
 
-           // Toast.makeText(SettingsActivity.this,imageURI,Toast.LENGTH_LONG).show();
+            // Toast.makeText(SettingsActivity.this,imageURI,Toast.LENGTH_LONG).show();
         }
 
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
+
+        }
     }
 }
