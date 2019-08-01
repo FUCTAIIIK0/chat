@@ -8,12 +8,14 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -45,6 +48,8 @@ public class SettingsActivity extends AppCompatActivity {
     private StorageReference mImageStorage;
     //Progress
     private ProgressDialog mProgressDialog;
+    private String download_url;
+
 
 
 
@@ -54,11 +59,13 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         //Storage
         mImageStorage = FirebaseStorage.getInstance().getReference();
+        download_url = "default";
         //Layout
         imageBtn = findViewById(R.id.settings_imageBtn);
         statusBtn = findViewById(R.id.settings_statusBtn);
         mName = findViewById(R.id.settings_displayName);
         mStatus = findViewById(R.id.settings_statusText);
+        mImage = findViewById(R.id.settings_image);
         statusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,26 +102,19 @@ public class SettingsActivity extends AppCompatActivity {
         mUserDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String name = "null";
-                String image = "null";
-                String status = "null";
-                String thumb_image = "null";
-                if (dataSnapshot.child("name").getValue() != null) {
-                    name = dataSnapshot.child("name").getValue().toString();
-                }
-                if (dataSnapshot.child("image").getValue() != null) {
-                    image = dataSnapshot.child("image").getValue().toString();
-                }
-                if (dataSnapshot.child("status").getValue() != null) {
-                    status = dataSnapshot.child("status").getValue().toString();
-                }
-                if (dataSnapshot.child("thumb_image").getValue() != null) {
-                    thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
-                }
+
+                String name = dataSnapshot.child("name").getValue().toString();
+                String image = dataSnapshot.child("image").getValue().toString();
+                String status = dataSnapshot.child("status").getValue().toString();
+                String thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
+
 
                 mName.setText(name);
                 mStatus.setText(status);
 
+                if (!image.equals("default")) {
+                    Picasso.with(SettingsActivity.this).load(image).into(mImage);
+                }
 
             }
 
@@ -129,6 +129,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == GALLERY_PICK && resultCode == RESULT_OK) {
 
             String current_user_id = mCurrentUser.getUid();
@@ -148,8 +149,8 @@ public class SettingsActivity extends AppCompatActivity {
                 mProgressDialog.setMessage("Please wait while we upload the image");
                 mProgressDialog.setCanceledOnTouchOutside(false);
                 mProgressDialog.show();
-
-                Uri resultUri = result.getUri();
+                //add final
+                final Uri resultUri = result.getUri();
 
                 String current_uid = mCurrentUser.getUid();
 
@@ -159,20 +160,36 @@ public class SettingsActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if (task.isSuccessful()){
-                            //maybe .getDownloadUri
-                            String download_url = task.getResult().getUploadSessionUri().toString();
-                            mUserDatabase.child("image").setValue(download_url).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            //String download_url = task.getResult().getMetadata().getReference().getDownloadUrl().toString();
+                            //String download_url =task.getResult().getStorage().getDownloadUrl().toString();
+
+                             task.getResult().getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
-                                        mProgressDialog.dismiss();
-                                        Toast.makeText(SettingsActivity.this,"Uploading Success",Toast.LENGTH_LONG).show();
-                                    }else {
-                                        mProgressDialog.hide();
-                                        Toast.makeText(SettingsActivity.this,"Uploading Error",Toast.LENGTH_LONG).show();
-                                    }
+                                public void onSuccess(Uri uri) {
+                                    //Get Url from Database
+                                    String uriS = uri.toString();
+                                    download_url = uriS;
+                                    Log.e("Tuts+", "uri: " + uriS);
+
+                                    //Upload link to database
+                                    mUserDatabase.child("image").setValue(download_url).addOnCompleteListener(new OnCompleteListener<Void>(){
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()){
+                                                mProgressDialog.dismiss();
+                                                Toast.makeText(SettingsActivity.this,"Uploading Success",Toast.LENGTH_LONG).show();
+                                            }else {
+                                                mProgressDialog.hide();
+                                                Toast.makeText(SettingsActivity.this,"Uploading Error",Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    });
                                 }
                             });
+
+                            //download_url = "defoult";
+
+
 
                         }else {
                             mProgressDialog.dismiss();
