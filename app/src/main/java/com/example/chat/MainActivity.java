@@ -90,8 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
          }
          if (item.getItemId() == R.id.mainAllUsersBtn){
-             //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-             //Log.d("Menu", "All users "+FirebaseAuth.getInstance().getCurrentUser().getDisplayName().toString());
+             Intent usersIntent = new Intent(MainActivity.this,UsersActivity.class);
+             startActivity(usersIntent);
+
          }
          if (item.getItemId() == R.id.mainSettingsBtn){
              Intent settingsIntent = new Intent(MainActivity.this,SettingsActivity.class);

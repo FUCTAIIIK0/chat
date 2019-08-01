@@ -187,10 +187,6 @@ public class SettingsActivity extends AppCompatActivity {
                                 }
                             });
 
-                            //download_url = "defoult";
-
-
-
                         }else {
                             mProgressDialog.dismiss();
                             Toast.makeText(SettingsActivity.this,"Uploading Error",Toast.LENGTH_LONG).show();
@@ -205,7 +201,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
     //Storage file name generation
-    public static String random() {
+    private static String random() {
         Random generator = new Random();
         StringBuilder randomStringBuilder = new StringBuilder();
         int randomLength = generator.nextInt(20);
