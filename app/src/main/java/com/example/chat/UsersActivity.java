@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,10 +54,24 @@ public class UsersActivity extends AppCompatActivity {
                 mUsersDatabase
         ) {
             @Override
-            protected void populateViewHolder(UsersViewHolder usersViewHolder, Users users, int i) {
+            protected void populateViewHolder(UsersViewHolder usersViewHolder, Users users, int position) {
                 usersViewHolder.setName(users.getName());
                 usersViewHolder.setStatus(users.getStatus());
                 usersViewHolder.setUsersImage(users.getThumb_image(), getApplicationContext());
+
+                String user_id = getRef(position).getKey();
+
+                usersViewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent profiliIntent = new Intent(UsersActivity.this,ProfileActivity.class);
+                        profiliIntent.putExtra("user_id",user_id);
+                        startActivity(profiliIntent);
+
+                    }
+                });
+
             }
         };
         users_list.setAdapter(firebaseRecyclerAdapter);
