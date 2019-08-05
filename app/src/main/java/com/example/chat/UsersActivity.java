@@ -51,6 +51,7 @@ public class UsersActivity extends AppCompatActivity {
             @Override
             protected void populateViewHolder(UsersViewHolder usersViewHolder, Users users, int i) {
                 usersViewHolder.setName(users.getName());
+                usersViewHolder.setStatus(users.getStatus());
             }
         };
         users_list.setAdapter(firebaseRecyclerAdapter);
@@ -66,6 +67,10 @@ public class UsersActivity extends AppCompatActivity {
         public void setName(String name){
             TextView userNameViev = mView.findViewById(R.id.users_singleName);
             userNameViev.setText(name);
+        }
+        public void setStatus(String status){
+            TextView userStatusViev = mView.findViewById(R.id.users_singleStatus);
+            userStatusViev.setText(status);
         }
 
     }
