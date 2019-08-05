@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,9 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class UsersActivity extends AppCompatActivity {
@@ -52,7 +56,7 @@ public class UsersActivity extends AppCompatActivity {
             protected void populateViewHolder(UsersViewHolder usersViewHolder, Users users, int i) {
                 usersViewHolder.setName(users.getName());
                 usersViewHolder.setStatus(users.getStatus());
-                //usersViewHolder.setUserImage(users.getThumb_image());
+                usersViewHolder.setUsersImage(users.getThumb_image(), getApplicationContext());
             }
         };
         users_list.setAdapter(firebaseRecyclerAdapter);
@@ -72,6 +76,11 @@ public class UsersActivity extends AppCompatActivity {
         public void setStatus(String status){
             TextView userStatusViev = mView.findViewById(R.id.users_singleStatus);
             userStatusViev.setText(status);
+        }
+
+        public void setUsersImage(String thumb_image, Context ctx){
+            CircleImageView userImageView = mView.findViewById(R.id.users_singleImage);
+            Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.userpic).into(userImageView);
         }
 
     }

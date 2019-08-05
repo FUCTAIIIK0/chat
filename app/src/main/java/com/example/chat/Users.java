@@ -1,10 +1,10 @@
 package com.example.chat;
 
 public class Users {
-    public String name;
-    public String image;
-    public String status;
-    public String thumb_image;
+    private String name;
+    private String image;
+    private String status;
+    private String thumb_image;
 
     public Users(){}
 
