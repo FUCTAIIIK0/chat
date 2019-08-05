@@ -52,6 +52,7 @@ public class UsersActivity extends AppCompatActivity {
             protected void populateViewHolder(UsersViewHolder usersViewHolder, Users users, int i) {
                 usersViewHolder.setName(users.getName());
                 usersViewHolder.setStatus(users.getStatus());
+                //usersViewHolder.setUserImage(users.getThumb_image());
             }
         };
         users_list.setAdapter(firebaseRecyclerAdapter);

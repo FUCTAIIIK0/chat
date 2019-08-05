@@ -162,7 +162,7 @@ public class SettingsActivity extends AppCompatActivity {
                 Uri resultUri = result.getUri();
 
 
-                //Image compression
+                //Image compression disable
                 File thumb_filePath = new File(resultUri.getPath());
                 String current_uid = mCurrentUser.getUid();
 
@@ -241,7 +241,7 @@ public class SettingsActivity extends AppCompatActivity {
                                     Log.e("Thumbs+", "uri: " + uriThumbS);
 
                                     //Upload link to database
-                                    mUserDatabase.child("image").setValue(download_url).addOnCompleteListener(new OnCompleteListener<Void>(){
+                                    mUserDatabase.child("thumb_image").setValue(download_url).addOnCompleteListener(new OnCompleteListener<Void>(){
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()){
