@@ -38,22 +38,34 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        //Layout
+        mChatToolbar = findViewById(R.id.chat_appBar);
+        setSupportActionBar(mChatToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(" ");
+
+        chatImage = findViewById(R.id.chat_userImage);
+        name =findViewById(R.id.chat_displayName);
+        online = findViewById(R.id.chat_onlineStatus);
+
+
+
         //Databse
         mChatUser = getIntent().getStringExtra("user_id");
         mRootRef = FirebaseDatabase.getInstance().getReference();
-        mRootRef.child("Users").child(mChatUser).addListenerForSingleValueEvent(new ValueEventListener() {
+        mRootRef.child("Users").child(mChatUser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //set Name
-                String chat_user_name = dataSnapshot.child("name").getValue().toString();
-                name.setText(chat_user_name);
                 //set Online
                 String chat_online = dataSnapshot.child("online").getValue().toString();
                 online.setText(chat_online);
+
+                //set Name
+                String chat_user_name = dataSnapshot.child("name").getValue().toString();
+                name.setText(chat_user_name);
                 //set Image
                 chatImage = findViewById(R.id.chat_userImage);
                 String thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
-                Log.d("thumb_image", "onDataChange: "+thumb_image);
                 Picasso.with(ChatActivity.this).load(thumb_image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.userpic).into(chatImage, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -74,22 +86,13 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 });
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
 
-        //Layout
-        mChatToolbar = findViewById(R.id.chat_appBar);
-        setSupportActionBar(mChatToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(" ");
 
-        chatImage = findViewById(R.id.chat_userImage);
-        name =findViewById(R.id.chat_displayName);
-        online = findViewById(R.id.chat_onlineStatus);
 
 
 

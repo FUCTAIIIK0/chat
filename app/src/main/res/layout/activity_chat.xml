@@ -90,4 +90,5 @@
             app:srcCompat="@drawable/baseline_send_white_36dp" />
 
     </LinearLayout>
+
 </RelativeLayout>
