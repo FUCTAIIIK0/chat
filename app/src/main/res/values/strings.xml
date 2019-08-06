@@ -21,4 +21,7 @@
     <string name="display_name">Display Name</string>
     <string name="change_image_Btn">Change Image</string>
     <string name="change_status_Btn">Change Status</string>
+    <string name="userPage_name">Display Name</string>
+    <string name="userPage_default_status">User default status</string>
+    <string name="userPage_online_status">Online status</string>
 </resources>
