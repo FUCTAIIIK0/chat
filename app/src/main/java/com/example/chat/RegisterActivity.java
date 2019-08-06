@@ -90,6 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
                             HashMap<String, String> userMap = new HashMap<>();
                             userMap.put("name", displayName);
                             userMap.put("status","Hi there ");
+                            userMap.put("online","default");
                             userMap.put("image","default");
                             userMap.put("thumb_image","default");
 

@@ -14,13 +14,19 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
+    //Layout
     private Toolbar mToolbar;
     private ViewPager mViewPager;
     private SectionPagerAdapter mSectionPagerAdapter;
     private TabLayout mTabLayout;
+    //Database
+    private FirebaseAuth mAuth;
+    private DatabaseReference mStatusDatabase;
+    private FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +34,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-        //Firebase Auth
-
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUserUID = currentUser.getUid();
+        mStatusDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserUID);
 
         //Layout
         mToolbar = findViewById(R.id.main_PageToolbar);
@@ -44,16 +51,16 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout = findViewById(R.id.main_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
 
-
-
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
         FirebaseUser curentUser = mAuth.getCurrentUser();
-        if (curentUser == null){
+        if (curentUser != null){
+            mStatusDatabase.child("online").setValue("online");
+
+        }else {
             sendToStart();
         }
         // Check if user is signed in (non-null) and update UI accordingly.

@@ -28,14 +28,14 @@
         android:id="@+id/users_singleStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/onlineStatus"
+        android:layout_below="@+id/users_onlineStatus"
         android:layout_marginStart="16dp"
         android:layout_marginTop="7dp"
         android:layout_toEndOf="@+id/users_singleImage"
         android:text="@string/userPage_default_status" />
 
     <TextView
-        android:id="@+id/onlineStatus"
+        android:id="@+id/users_onlineStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/users_singleName"

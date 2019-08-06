@@ -61,6 +61,8 @@ public class UsersActivity extends AppCompatActivity {
             protected void populateViewHolder(UsersViewHolder usersViewHolder, Users users, int position) {
                 usersViewHolder.setName(users.getName());
                 usersViewHolder.setStatus(users.getStatus());
+                usersViewHolder.setOnlineStatus(users.getOnlineStatus());
+                String status = users.getOnlineStatus();
                 usersViewHolder.setUsersImage(users.getThumb_image(), getApplicationContext());
 
                 String user_id = getRef(position).getKey();
@@ -95,6 +97,10 @@ public class UsersActivity extends AppCompatActivity {
         public void setStatus(String status){
             TextView userStatusViev = mView.findViewById(R.id.users_singleStatus);
             userStatusViev.setText(status);
+        }
+        public void setOnlineStatus(String onlineStatus){
+            TextView userOnlineStatus = mView.findViewById(R.id.users_onlineStatus);
+            userOnlineStatus.setText(onlineStatus);
         }
 
         public void setUsersImage(String thumb_image, Context ctx){
