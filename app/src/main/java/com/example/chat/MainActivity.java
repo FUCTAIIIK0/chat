@@ -35,9 +35,10 @@ public class MainActivity extends AppCompatActivity {
         //Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String currentUserUID = currentUser.getUid();
-        mStatusDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserUID);
-
+        if (currentUser !=null) {
+            String currentUserUID = currentUser.getUid();
+            mStatusDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserUID);
+        }
         //Layout
         mToolbar = findViewById(R.id.main_PageToolbar);
         setSupportActionBar(mToolbar);
@@ -50,6 +51,22 @@ public class MainActivity extends AppCompatActivity {
 
         mTabLayout = findViewById(R.id.main_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FirebaseUser curentUser = mAuth.getCurrentUser();
+        if (curentUser != null){
+            mStatusDatabase.child("online").setValue("offline");
+            }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //mStatusDatabase.child("online").setValue("offline");
 
     }
 
@@ -78,9 +95,6 @@ public class MainActivity extends AppCompatActivity {
          super.onCreateOptionsMenu(menu);
 
          getMenuInflater().inflate(R.menu.main_menu, menu);
-
-
-
          return true;
     }
 
@@ -94,20 +108,15 @@ public class MainActivity extends AppCompatActivity {
                  sendToStart();
                  Log.d("Menu", "Logout null");
              }
-
          }
          if (item.getItemId() == R.id.mainAllUsersBtn){
              Intent usersIntent = new Intent(MainActivity.this,UsersActivity.class);
              startActivity(usersIntent);
-
          }
          if (item.getItemId() == R.id.mainSettingsBtn){
              Intent settingsIntent = new Intent(MainActivity.this,SettingsActivity.class);
              startActivity(settingsIntent);
-
          }
-
-
          return true;
     }
 }
