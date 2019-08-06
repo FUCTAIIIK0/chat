@@ -17,6 +17,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
     //Layout
     private Toolbar mToolbar;
@@ -58,8 +61,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         FirebaseUser curentUser = mAuth.getCurrentUser();
+        String data = new SimpleDateFormat("HH:mm MM/dd/yyyy").format(Calendar.getInstance().getTime());
         if (curentUser != null){
-            mStatusDatabase.child("online").setValue("offline");
+            mStatusDatabase.child("online").setValue("Last seen "+data);
             }
     }
 
