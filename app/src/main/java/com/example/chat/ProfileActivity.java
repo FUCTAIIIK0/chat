@@ -19,7 +19,7 @@ import com.squareup.picasso.Picasso;
 public class ProfileActivity extends AppCompatActivity {
     //Layout
     private ImageView profileImage;
-    private TextView profileDisplayName,profileStatus,profileTotalFriends;
+    private TextView profileDisplayName,profileStatus,profileTotalFriends,profileOnlineStatus;
     private Button profileSendReqBtn;
     //Database
     private DatabaseReference mUsersDatabase;
@@ -36,6 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
         profileImage = findViewById(R.id.profile_image);
         profileTotalFriends = findViewById(R.id.profile_totalFriends);
         profileSendReqBtn = findViewById(R.id.profile_send_req_btn);
+        profileOnlineStatus = findViewById(R.id.profile_onlineStatus);
 
         //ProgressDialog
         mProgressdialog = new ProgressDialog(this);
@@ -54,9 +55,11 @@ public class ProfileActivity extends AppCompatActivity {
                 String display_name = dataSnapshot.child("name").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
                 String image = dataSnapshot.child("image").getValue().toString();
+                String online = dataSnapshot.child("online").getValue().toString();
 
                 profileDisplayName.setText(display_name);
                 profileStatus.setText(status);
+                profileOnlineStatus.setText(online);
                 Picasso.with(ProfileActivity.this).load(image).placeholder(R.drawable.userpic).into(profileImage);
 
                 mProgressdialog.dismiss();

@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -54,6 +56,14 @@ public class ChatActivity extends AppCompatActivity {
                     public void onError() {
                         Picasso.with(ChatActivity.this).load(thumb_image).placeholder(R.drawable.userpic).into(chatImage);
 
+                    }
+                });
+                chatImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent profiliIntent = new Intent(ChatActivity.this,ProfileActivity.class);
+                        profiliIntent.putExtra("user_id",mChatUser);
+                        startActivity(profiliIntent);
                     }
                 });
 

@@ -16,7 +16,7 @@ public class Chat extends Application {
         Picasso.Builder builder = new Picasso.Builder(this);
         builder.downloader(new OkHttpDownloader(this,Integer.MAX_VALUE));
         Picasso build = builder.build();
-        build.setIndicatorsEnabled(true);
+        build.setIndicatorsEnabled(false);
         build.setLoggingEnabled(true);
         Picasso.setSingletonInstance(build);
 
