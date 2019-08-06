@@ -35,11 +35,10 @@ public class StatusActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
-        //Firebase
+        //Database
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String currentUID = currentUser.getUid();
         mStatusDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUID);
-
         String status_value = getIntent().getStringExtra("status_value");
 
         //Layout
@@ -76,6 +75,5 @@ public class StatusActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Account Status");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //Layout
     }
 }

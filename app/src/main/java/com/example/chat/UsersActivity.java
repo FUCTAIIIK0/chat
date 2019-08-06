@@ -6,9 +6,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -37,14 +40,12 @@ public class UsersActivity extends AppCompatActivity {
         setSupportActionBar(users_toolBar);
         getSupportActionBar().setTitle("Users Page");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
-        mUsersDatabase.keepSynced(true);
-
-
         users_list =findViewById(R.id.users_list);
         users_list.setHasFixedSize(true);
         users_list.setLayoutManager(new LinearLayoutManager(this));
+        //Database
+        mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        mUsersDatabase.keepSynced(true);
     }
 
     @Override
@@ -62,7 +63,6 @@ public class UsersActivity extends AppCompatActivity {
                 usersViewHolder.setName(users.getName());
                 usersViewHolder.setStatus(users.getStatus());
                 usersViewHolder.setOnlineStatus(users.getOnlineStatus());
-                String status = users.getOnlineStatus();
                 usersViewHolder.setUsersImage(users.getThumb_image(), getApplicationContext());
 
                 String user_id = getRef(position).getKey();
@@ -71,10 +71,28 @@ public class UsersActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                        Intent profiliIntent = new Intent(UsersActivity.this,ProfileActivity.class);
+/*                        Intent profiliIntent = new Intent(UsersActivity.this,ProfileActivity.class);
                         profiliIntent.putExtra("user_id",user_id);
-                        startActivity(profiliIntent);
+                        startActivity(profiliIntent);*/
+                        CharSequence options[] = new CharSequence[]{"Open Profile","Send message"};
+                        AlertDialog.Builder builder = new AlertDialog.Builder(UsersActivity.this);
+                        builder.setTitle("Select Options");
+                        builder.setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if (i ==0){
+                                    Intent profiliIntent = new Intent(UsersActivity.this,ProfileActivity.class);
+                                    profiliIntent.putExtra("user_id",user_id);
+                                    startActivity(profiliIntent);
+                                }
+                                if (i==1){
+                                    Intent chatIntent = new Intent(UsersActivity.this,ChatActivity.class);
+                                    chatIntent.putExtra("user_id",user_id);
+                                    startActivity(chatIntent);                                }
 
+                            }
+                        });
+                        builder.show();
                     }
                 });
 
@@ -105,13 +123,10 @@ public class UsersActivity extends AppCompatActivity {
 
         public void setUsersImage(String thumb_image, Context ctx){
             CircleImageView userImageView = mView.findViewById(R.id.users_singleImage);
-            //Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.userpic).into(userImageView);
             Picasso.with(ctx).load(thumb_image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.userpic).into(userImageView, new Callback() {
                 @Override
                 public void onSuccess() {
-
                 }
-
                 @Override
                 public void onError() {
                     Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.userpic).into(userImageView);

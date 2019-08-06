@@ -57,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void sendToStart() {
+        Intent startIntent = new Intent(MainActivity.this, StartActivity.class);
+        startActivity(startIntent);
+        finish();
+    }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -70,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //mStatusDatabase.child("online").setValue("offline");
 
     }
 
@@ -86,12 +91,6 @@ public class MainActivity extends AppCompatActivity {
         }
         // Check if user is signed in (non-null) and update UI accordingly.
 
-    }
-
-    private void sendToStart() {
-        Intent startIntent = new Intent(MainActivity.this, StartActivity.class);
-        startActivity(startIntent);
-        finish();
     }
 
     @Override
