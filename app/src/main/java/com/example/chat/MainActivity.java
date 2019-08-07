@@ -68,10 +68,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         FirebaseUser curentUser = mAuth.getCurrentUser();
-        String data = new SimpleDateFormat("HH:mm MM/dd/yyyy").format(Calendar.getInstance().getTime());
+        Long tsLong = System.currentTimeMillis()/1000;
+        String ts = tsLong.toString();
+        GetTimeAgo getTimeAgo = new GetTimeAgo();
+        String lastSeenTime = getTimeAgo.getTimeAgo(tsLong,getApplicationContext());
+        if (curentUser != null){
+            mStatusDatabase.child("online").setValue("Last seen "+lastSeenTime);
+        }
+
+
+
+        //set current time on datatbase
+/*        String data = new SimpleDateFormat("HH:mm MM/dd/yyyy").format(Calendar.getInstance().getTime());
         if (curentUser != null){
             mStatusDatabase.child("online").setValue("Last seen "+data);
-            }
+            }*/
+
     }
 
     @Override
