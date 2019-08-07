@@ -1,6 +1,7 @@
 package com.example.chat;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -76,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (currentUser != null){
+            sendToStart();
+        }
 
     }
 
