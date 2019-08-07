@@ -43,6 +43,7 @@
         android:textSize="12sp" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_messages_list"
         android:layout_width="267dp"
         android:layout_height="503dp"
         android:layout_above="@+id/messageLayout"

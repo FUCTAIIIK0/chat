@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public class ChatActivity extends AppCompatActivity {
     private DatabaseReference mRootRef;
     private FirebaseAuth mAth;
     private String mCurrentUserID;
+    private RecyclerView mMessagesList;
 
 
 
@@ -62,6 +64,7 @@ public class ChatActivity extends AppCompatActivity {
         chatAddBtn = findViewById(R.id.chat_addBtn);
         chatSendBtn = findViewById(R.id.chatSendBtn);
         chatMessage = findViewById(R.id.chat_editText);
+        mMessagesList = findViewById(R.id.chat_messages_list);
 
 
         //Databse
