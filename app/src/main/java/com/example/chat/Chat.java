@@ -20,5 +20,8 @@ public class Chat extends Application {
         build.setLoggingEnabled(true);
         Picasso.setSingletonInstance(build);
 
+
+
+
     }
 }
