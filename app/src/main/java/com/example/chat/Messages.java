@@ -1,15 +1,22 @@
 package com.example.chat;
 
 public class Messages {
-    private String message,seem,time,type,from;
-    public Messages(){}
+    private String message,type;
+    //private String from;
+    private long time;
+    private boolean seen;
 
-    public Messages(String message, String seem, String time, String type, String from) {
+
+    public Messages(){
+
+    }
+
+    public Messages(String message, boolean seen, long time, String type) {
         this.message = message;
-        this.seem = seem;
+        this.seen = seen;
         this.time = time;
         this.type = type;
-        this.from = from;
+        //this.from = from;
     }
 
     public String getMessage() {
@@ -19,17 +26,17 @@ public class Messages {
         this.message = message;
     }
 
-    public String getSeem() {
-        return seem;
+    public boolean getSeem() {
+        return seen;
     }
-    public void setSeem(String seem) {
-        this.seem = seem;
+    public void setSeem(boolean seem) {
+        this.seen = seem;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 
@@ -40,12 +47,12 @@ public class Messages {
         this.type = type;
     }
 
-    public String getFrom() {
+   /* public String getFrom() {
         return from;
     }
     public void setFrom(String from) {
         this.from = from;
-    }
+    }*/
 
 
 

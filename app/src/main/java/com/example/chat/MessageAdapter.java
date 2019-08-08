@@ -54,10 +54,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public void onBindViewHolder(final MessageViewHolder viewHolder, int i) {
         Messages c = mMessageList.get(i);
-        String from_user = c.getFrom();
-        String message_type = c.getType();
-        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(from_user);
-        mUserDatabase.addValueEventListener(new ValueEventListener() {
+        viewHolder.messageText.setText(c.getMessage());
+
+        //String from_user = c.getFrom();
+        //String message_type = c.getType();
+        //mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(c.getMessage());
+/*        mUserDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String name = dataSnapshot.child("name").getValue().toString();
@@ -69,15 +71,19 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
-        });
-        if(message_type.equals("text")) {
+        });*/
+
+
+
+
+       /* if(message_type.equals("text")) {
             viewHolder.messageText.setText(c.getMessage());
             viewHolder.messageImage.setVisibility(View.INVISIBLE);
         } else {
             viewHolder.messageText.setVisibility(View.INVISIBLE);
             Picasso.with(viewHolder.profileImage.getContext()).load(c.getMessage())
                     .placeholder(R.drawable.userpic).into(viewHolder.messageImage);
-        }
+        }*/
     }
             @Override
             public int getItemCount() {
