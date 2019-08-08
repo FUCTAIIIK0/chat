@@ -31,6 +31,7 @@ public class UsersActivity extends AppCompatActivity {
     private Toolbar users_toolBar;
     private RecyclerView users_list;
     private DatabaseReference mUsersDatabase;
+    private DatabaseReference mChatDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,9 @@ public class UsersActivity extends AppCompatActivity {
         //Database
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         mUsersDatabase.keepSynced(true);
+
+        mChatDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        mChatDatabase.keepSynced(true);
     }
 
     @Override
@@ -72,9 +76,11 @@ public class UsersActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-/*                        Intent profiliIntent = new Intent(UsersActivity.this,ProfileActivity.class);
+                        /* Intent profiliIntent = new Intent(UsersActivity.this,ProfileActivity.class);
                         profiliIntent.putExtra("user_id",user_id);
                         startActivity(profiliIntent);*/
+
+
                         CharSequence options[] = new CharSequence[]{"Open Profile","Send message"};
                         AlertDialog.Builder builder = new AlertDialog.Builder(UsersActivity.this);
                         builder.setTitle("Select Options");
@@ -131,12 +137,9 @@ public class UsersActivity extends AppCompatActivity {
                 @Override
                 public void onError() {
                     Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.userpic).into(userImageView);
-
                 }
             });
-
         }
-
     }
 }
 

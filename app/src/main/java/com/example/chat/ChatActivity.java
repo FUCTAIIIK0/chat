@@ -34,6 +34,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ChatActivity extends AppCompatActivity {
     //layout
     private Toolbar mChatToolbar;
@@ -70,9 +72,6 @@ public class ChatActivity extends AppCompatActivity {
         chatAddBtn = findViewById(R.id.chat_addBtn);
         chatSendBtn = findViewById(R.id.chatSendBtn);
         chatMessage = findViewById(R.id.chat_editText);
-
-
-
 
         //Databse
         mChatUser = getIntent().getStringExtra("user_id");
@@ -167,6 +166,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sendMessage();
+                chatMessage.setText(" ");
 
             }
         });
@@ -237,10 +237,13 @@ public class ChatActivity extends AppCompatActivity {
             messageMap.put("seen",false);
             messageMap.put("type","text");
             messageMap.put("time",ServerValue.TIMESTAMP);
+            messageMap.put("from",mCurrentUserID);
 
             Map messageUserMap = new HashMap();
             messageUserMap.put(current_user_ref+"/"+push_id, messageMap);
             messageUserMap.put(chat_user_ref+"/"+push_id, messageMap);
+
+            chatMessage.setText("");
 
             mRootRef.updateChildren(messageUserMap, new DatabaseReference.CompletionListener() {
                 @Override

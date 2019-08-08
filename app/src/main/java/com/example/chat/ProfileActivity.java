@@ -58,6 +58,9 @@ public class ProfileActivity extends AppCompatActivity {
                 String image = dataSnapshot.child("image").getValue().toString();
                 String online = dataSnapshot.child("online").getValue().toString();
 
+                //GetTimeAgo getTimeAgo = new GetTimeAgo();
+                //String lastSeenTime = getTimeAgo.getTimeAgo(online,getApplicationContext()).toString();
+
                 profileDisplayName.setText(display_name);
                 profileStatus.setText(status);
                 profileOnlineStatus.setText(online);
