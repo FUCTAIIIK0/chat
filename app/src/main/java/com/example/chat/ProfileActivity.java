@@ -63,7 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
                     //Convert to last seen view
                     Integer timeInteget = Integer.parseInt(time);
                     GetTimeAgo getTimeAgo = new GetTimeAgo();
-                     lastSeenTime = getTimeAgo.getTimeAgo(timeInteget,getApplicationContext());
+                    lastSeenTime = getTimeAgo.getTimeAgo(timeInteget,getApplicationContext());
                 }else {
                      lastSeenTime = "online";
                 }

@@ -85,7 +85,19 @@ public class ChatActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //set Online
                 String chat_online = dataSnapshot.child("online").getValue().toString();
-                online.setText(chat_online);
+                String lastSeenTime;
+
+
+                if (!chat_online.equals("online")){
+                    //Convert to last seen view
+                    Integer timeInteget = Integer.parseInt(chat_online);
+                    GetTimeAgo getTimeAgo = new GetTimeAgo();
+                    lastSeenTime = getTimeAgo.getTimeAgo(timeInteget,getApplicationContext());
+                }else {
+                    lastSeenTime = "online";
+                }
+
+                online.setText(lastSeenTime);
 
                 //set Name
                 String chat_user_name = dataSnapshot.child("name").getValue().toString();
