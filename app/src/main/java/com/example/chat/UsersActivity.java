@@ -67,7 +67,7 @@ public class UsersActivity extends AppCompatActivity {
             protected void populateViewHolder(UsersViewHolder usersViewHolder, Users users, int position) {
                 usersViewHolder.setName(users.getName());
                 usersViewHolder.setStatus(users.getStatus());
-                usersViewHolder.setOnlineStatus(users.getOnlineStatus());
+                usersViewHolder.setOnlineStatus(users.getOnlineStatus(),UsersActivity.this);
                 usersViewHolder.setUsersImage(users.getThumb_image(), getApplicationContext());
 
                 String user_id = getRef(position).getKey();
@@ -79,7 +79,6 @@ public class UsersActivity extends AppCompatActivity {
                         /* Intent profiliIntent = new Intent(UsersActivity.this,ProfileActivity.class);
                         profiliIntent.putExtra("user_id",user_id);
                         startActivity(profiliIntent);*/
-
 
                         CharSequence options[] = new CharSequence[]{"Open Profile","Send message"};
                         AlertDialog.Builder builder = new AlertDialog.Builder(UsersActivity.this);
@@ -123,9 +122,20 @@ public class UsersActivity extends AppCompatActivity {
             TextView userStatusViev = mView.findViewById(R.id.users_singleStatus);
             userStatusViev.setText(status);
         }
-        public void setOnlineStatus(String onlineStatus){
-            TextView userOnlineStatus = mView.findViewById(R.id.users_onlineStatus);
-            userOnlineStatus.setText(onlineStatus);
+        public void setOnlineStatus(String onlineStatus,Context ctx){
+            if (!onlineStatus.equals("online")){
+                GetTimeAgo getTimeAgo = new GetTimeAgo();
+                Integer time = Integer.parseInt(onlineStatus);
+
+                String lastSeenTime = getTimeAgo.getTimeAgo(time,ctx);
+
+                TextView userOnlineStatus = mView.findViewById(R.id.users_onlineStatus);
+                userOnlineStatus.setText(lastSeenTime);
+            }else {
+                TextView userOnlineStatus = mView.findViewById(R.id.users_onlineStatus);
+                userOnlineStatus.setText(onlineStatus);
+            }
+
         }
 
         public void setUsersImage(String thumb_image, Context ctx){

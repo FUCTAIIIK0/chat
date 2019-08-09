@@ -65,7 +65,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         String from_user = c.getFrom();
         String message_type = c.getType();
         String userid = c.getMessage();
-        GetTimeAgo getTimeAgo = new GetTimeAgo();
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(c.getFrom());
         mUserDatabase.addValueEventListener(new ValueEventListener() {

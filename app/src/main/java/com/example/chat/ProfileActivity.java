@@ -56,14 +56,23 @@ public class ProfileActivity extends AppCompatActivity {
                 String display_name = dataSnapshot.child("name").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
                 String image = dataSnapshot.child("image").getValue().toString();
-                String online = dataSnapshot.child("online").getValue().toString();
+                String time = dataSnapshot.child("online").getValue().toString();
+                String lastSeenTime;
 
-                //GetTimeAgo getTimeAgo = new GetTimeAgo();
-                //String lastSeenTime = getTimeAgo.getTimeAgo(online,getApplicationContext()).toString();
+                if (!time.equals("online")){
+                    //Convert to last seen view
+                    Integer timeInteget = Integer.parseInt(time);
+                    GetTimeAgo getTimeAgo = new GetTimeAgo();
+                     lastSeenTime = getTimeAgo.getTimeAgo(timeInteget,getApplicationContext());
+                }else {
+                     lastSeenTime = "online";
+                }
+
+
 
                 profileDisplayName.setText(display_name);
                 profileStatus.setText(status);
-                profileOnlineStatus.setText(online);
+                profileOnlineStatus.setText(lastSeenTime);
                 Picasso.with(ProfileActivity.this).load(image).placeholder(R.drawable.userpic).into(profileImage);
 
                 mProgressdialog.dismiss();
