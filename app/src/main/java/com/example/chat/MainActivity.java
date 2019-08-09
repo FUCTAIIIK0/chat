@@ -72,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
         Long tsLong = System.currentTimeMillis()/1000;
         String ts = tsLong.toString();
 
-        GetTimeAgo getTimeAgo = new GetTimeAgo();
-        String lastSeenTime = getTimeAgo.getTimeAgo(tsLong,getApplicationContext());
         if (curentUser != null){
             mStatusDatabase.child("online").setValue(ts);
         }

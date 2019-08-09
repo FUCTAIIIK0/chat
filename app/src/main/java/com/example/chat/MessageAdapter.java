@@ -22,6 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -54,7 +56,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             messageText = (TextView) view.findViewById(R.id.message_text_layout);
             profileImage = (CircleImageView) view.findViewById(R.id.message_profile_image);
             displayName = (TextView) view.findViewById(R.id.message_display_name);
-            //messageImage =
+            messageTime = view.findViewById(R.id.message_time);
             messageText = view.findViewById(R.id.message_text_layout);
 
         }
@@ -65,6 +67,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         String from_user = c.getFrom();
         String message_type = c.getType();
         String userid = c.getMessage();
+
+        long time = c.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm  dd MMM");
+        Date resultdate = new Date(time);
+        String date = sdf.format(time);
+        //String date = sdf.toString();
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(c.getFrom());
         mUserDatabase.addValueEventListener(new ValueEventListener() {
@@ -81,11 +89,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             }
         });
 
+
+
         if(message_type.equals("text")) {
-
-
             viewHolder.messageText.setText(c.getMessage());
-            //viewHolder.messageTime.setText();
+            viewHolder.messageTime.setText(date);
             //viewHolder.profileImage.setVisibility(View.INVISIBLE);
         } else {
             viewHolder.messageText.setVisibility(View.INVISIBLE);
