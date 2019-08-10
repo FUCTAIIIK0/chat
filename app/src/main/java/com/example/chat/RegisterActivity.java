@@ -64,6 +64,11 @@ public class RegisterActivity extends AppCompatActivity {
                 String displayName = regDisplayName.getEditText().getText().toString();
                 String email = regEmail.getEditText().getText().toString();
                 String pasword = regPassword.getEditText().getText().toString();
+                if (pasword.length()<5){
+                    Toast.makeText(RegisterActivity.this, "Password must be more than 6 characters",
+                            Toast.LENGTH_SHORT).show();
+                }else {
+
                 if (!TextUtils.isEmpty(displayName) || !TextUtils.isEmpty(email)|| !TextUtils.isEmpty(pasword)){
                     mRegProgress.setTitle("Registring User");
                     mRegProgress.setMessage("Please wait while we create account");
@@ -71,7 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
                     mRegProgress.show();
                     registerUser(displayName,email,pasword);
                 }
-            }
+            }}
         });
 
     }
