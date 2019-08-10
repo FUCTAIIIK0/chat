@@ -11,4 +11,9 @@
         android:layout_height="match_parent"
         android:text="ChatsPage" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_chatRecyclerView"
+        android:layout_width="248dp"
+        android:layout_height="359dp" />
+
 </FrameLayout>
