@@ -10,6 +10,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -56,6 +57,35 @@ public class RegisterActivity extends AppCompatActivity {
         regDisplayName = findViewById(R.id.regDisplayName);
         regEmail = findViewById(R.id.regEmailEdittext);
         regPassword = findViewById(R.id.regPassword);
+
+        regDisplayName.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyEvent.getAction() == KeyEvent.KEYCODE_ENTER))  {
+                    return true;
+                }
+                return false;
+            }
+        });
+        regEmail.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyEvent.getAction() == KeyEvent.KEYCODE_ENTER))  {
+                    return true;
+                }
+                return false;
+            }
+        });
+        regPassword.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyEvent.getAction() == KeyEvent.KEYCODE_ENTER))  {
+                    return true;
+                }
+                return false;
+            }
+        });
+
 
         createAccountBtn = findViewById(R.id.createBtn);
         createAccountBtn.setOnClickListener(new View.OnClickListener(){
