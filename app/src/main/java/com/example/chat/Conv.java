@@ -1,10 +1,10 @@
 package com.example.chat;
 
-public class Conversations {
+public class Conv {
     public boolean seen;
     public long timestamp;
 
-    public  Conversations(){
+    public  Conv(){
     }
 
     public boolean isSeen() {
@@ -21,7 +21,7 @@ public class Conversations {
         this.timestamp = timestamp;
     }
 
-    public Conversations(boolean seen, long timestamp) {
+    public Conv(boolean seen, long timestamp) {
         this.seen = seen;
         this.timestamp = timestamp;
     }
