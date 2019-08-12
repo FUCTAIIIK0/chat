@@ -21,7 +21,7 @@
         android:layout_marginStart="3dp"
         android:layout_marginTop="6dp"
         android:layout_toEndOf="@+id/users_singleName"
-        android:visibility="visible"
+        android:visibility="invisible"
         tools:src="@android:color/holo_green_dark" />
 
     <TextView

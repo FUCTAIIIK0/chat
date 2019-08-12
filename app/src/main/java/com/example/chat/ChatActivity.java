@@ -87,7 +87,6 @@ public class ChatActivity extends AppCompatActivity {
                 String chat_online = dataSnapshot.child("online").getValue().toString();
                 String lastSeenTime;
 
-
                 if (!chat_online.equals("online")){
                     //Convert to last seen view
                     Integer timeInteget = Integer.parseInt(chat_online);
@@ -205,6 +204,10 @@ public class ChatActivity extends AppCompatActivity {
                 Messages message= dataSnapshot.getValue(Messages.class);
                 messagesList.add(message);
                 mAdapter.notifyDataSetChanged();
+
+                mMessagesList.smoothScrollToPosition(mMessagesList.getAdapter().getItemCount());
+
+
             }
 
             @Override
@@ -231,7 +234,10 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void sendMessage() {
-        String message = chatMessage.getText().toString();
+
+    mMessagesList.smoothScrollToPosition(mMessagesList.getAdapter().getItemCount());
+
+    String message = chatMessage.getText().toString();
 
 
         if (!TextUtils.isEmpty(message)){

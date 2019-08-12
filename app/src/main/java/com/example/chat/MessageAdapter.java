@@ -1,18 +1,13 @@
 
 package com.example.chat;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
-import android.os.Message;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -58,7 +52,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             displayName = (TextView) view.findViewById(R.id.message_display_name);
             messageTime = view.findViewById(R.id.message_time);
             messageText = view.findViewById(R.id.message_text_layout);
-
         }
     }
     @Override

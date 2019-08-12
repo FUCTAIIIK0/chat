@@ -128,7 +128,6 @@ public class UsersActivity extends AppCompatActivity {
                 Integer time = Integer.parseInt(onlineStatus);
 
                 String lastSeenTime = getTimeAgo.getTimeAgo(time,ctx);
-
                 TextView userOnlineStatus = mView.findViewById(R.id.users_onlineStatus);
                 userOnlineStatus.setText(lastSeenTime);
             }else {
