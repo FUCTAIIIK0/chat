@@ -43,6 +43,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         public TextView messageTime;
         public CircleImageView profileImage;
         public TextView displayName;
+        public TextView messageSeen;
 
 
         public MessageViewHolder(View view) {
@@ -52,6 +53,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             displayName = (TextView) view.findViewById(R.id.message_display_name);
             messageTime = view.findViewById(R.id.message_time);
             messageText = view.findViewById(R.id.message_text_layout);
+            messageSeen = view.findViewById(R.id.message_seen);
+
         }
     }
     @Override
@@ -60,6 +63,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         String from_user = c.getFrom();
         String message_type = c.getType();
         String userid = c.getMessage();
+        boolean seen = c.getSeen();
+
+        if (seen){
+            viewHolder.messageSeen.setText("not seen");
+
+        } else {
+            viewHolder.messageSeen.setText("seen");
+        }
+
 
         long time = c.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm  dd MMM");

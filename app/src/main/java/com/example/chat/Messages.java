@@ -26,10 +26,10 @@ public class Messages {
         this.message = message;
     }
 
-    public boolean getSeem() {
+    public boolean getSeen() {
         return seen;
     }
-    public void setSeem(boolean seem) {
+    public void setSeen(boolean seem) {
         this.seen = seem;
     }
 
