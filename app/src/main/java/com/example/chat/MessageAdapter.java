@@ -36,6 +36,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.message_single_layout ,parent, false);
+
         return new MessageViewHolder(v);
     }
     public class MessageViewHolder extends RecyclerView.ViewHolder {
@@ -64,12 +65,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         String message_type = c.getType();
         String userid = c.getMessage();
         boolean seen = c.getSeen();
-
+        //SeenStatus
         if (seen){
-            viewHolder.messageSeen.setText("not seen");
+            viewHolder.messageSeen.setText("seen");
 
         } else {
-            viewHolder.messageSeen.setText("seen");
+            viewHolder.messageSeen.setText("not seen");
         }
 
 
@@ -95,7 +96,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         });
 
 
-
+        //Type of messages
         if(message_type.equals("text")) {
             viewHolder.messageText.setText(c.getMessage());
             viewHolder.messageTime.setText(date);

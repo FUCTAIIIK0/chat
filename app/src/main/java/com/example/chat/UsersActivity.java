@@ -10,11 +10,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -25,7 +22,6 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
 
 public class UsersActivity extends AppCompatActivity {
     private Toolbar users_toolBar;
@@ -56,7 +52,6 @@ public class UsersActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         FirebaseRecyclerAdapter<Users, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, UsersViewHolder>(
                 Users.class,
                 R.layout.users_single_layout,
@@ -95,7 +90,6 @@ public class UsersActivity extends AppCompatActivity {
                                     Intent chatIntent = new Intent(UsersActivity.this,ChatActivity.class);
                                     chatIntent.putExtra("user_id",user_id);
                                     startActivity(chatIntent);                                }
-
                             }
                         });
                         builder.show();

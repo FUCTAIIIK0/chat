@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -46,6 +47,20 @@ public class LoginActivity extends AppCompatActivity {
 
 
     loginEmail = findViewById(R.id.loginEmailEdittext);
+
+    loginEmail.setOnKeyListener(new View.OnKeyListener() {
+        @Override
+        public boolean onKey(View view, int i, KeyEvent keyEvent) {
+            if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyEvent.getAction() == KeyEvent.KEYCODE_ENTER))  {
+                return true;
+            }
+            return false;
+        }
+    });
+
+
+
+
     loginPassword = findViewById(R.id.loginPassword);
 
     loginAccountBtn = findViewById(R.id.createBtn);

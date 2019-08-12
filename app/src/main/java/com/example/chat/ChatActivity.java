@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -181,6 +182,16 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
+  /*      chatSendBtn.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                Log.d("TUCH", "onTouch: ");
+            }
+        });*/
+
+       // Log.d("TUCH", "onTouch: ");
+
 
         mAdapter = new MessageAdapter(messagesList);
 
