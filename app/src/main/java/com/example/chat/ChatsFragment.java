@@ -52,6 +52,7 @@ public class ChatsFragment extends Fragment {
         mConvList = (RecyclerView) mMainView.findViewById(R.id.conv_list);
         mAuth = FirebaseAuth.getInstance();
         mCurrent_user_id = mAuth.getCurrentUser().getUid();
+
         mConvDatabase = FirebaseDatabase.getInstance().getReference().child("Chat").child(mCurrent_user_id);
         mConvDatabase.keepSynced(true);
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -111,12 +112,11 @@ public class ChatsFragment extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         final String userName = dataSnapshot.child("name").getValue().toString();
                         String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
-                        if(dataSnapshot.hasChild("online")) {
-                            String userOnline = dataSnapshot.child("online").getValue().toString();
-                            convViewHolder.setUserOnline(userOnline);
-                        }
+                        String onlineStatus = dataSnapshot.child("online").getValue().toString();
+
                         convViewHolder.setName(userName);
                         convViewHolder.setUserImage(userThumb, getContext());
+                        convViewHolder.setOnlineStatus(onlineStatus,getContext());
                         convViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -146,7 +146,6 @@ public class ChatsFragment extends Fragment {
         public void setMessage(String message, boolean isSeen){
             TextView userStatusView = (TextView) mView.findViewById(R.id.users_singleStatus);
             userStatusView.setText(message);
-
 /*            if(!isSeen){
 
                 userStatusView.setTypeface(userStatusView.getTypeface(), Typeface.BOLD);
@@ -165,6 +164,22 @@ public class ChatsFragment extends Fragment {
         public void setUserImage(String thumb_image, Context ctx){
             CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.users_singleImage);
             Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.userpic).into(userImageView);
+        }
+
+        public void setOnlineStatus(String onlineStatus,Context ctx){
+            if (!onlineStatus.equals("online")){
+                GetTimeAgo getTimeAgo = new GetTimeAgo();
+                Integer time = Integer.parseInt(onlineStatus);
+
+                String lastSeenTime = getTimeAgo.getTimeAgo(time,ctx);
+
+                TextView userOnlineStatus = mView.findViewById(R.id.users_onlineStatus);
+                userOnlineStatus.setText(lastSeenTime);
+            }else {
+                TextView userOnlineStatus = mView.findViewById(R.id.users_onlineStatus);
+                userOnlineStatus.setText(onlineStatus);
+            }
+
         }
 
         public void setUserOnline(String online_status) {

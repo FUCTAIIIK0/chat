@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         if (currentUser !=null) {
             String currentUserUID = currentUser.getUid();
             mStatusDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserUID);
+        }else {
+            sendToStart();
         }
         //Layout
         mToolbar = findViewById(R.id.main_PageToolbar);
