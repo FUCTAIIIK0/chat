@@ -37,15 +37,13 @@
         android:layout_below="@+id/loginText"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="8dp"
-        app:counterTextColor="@android:color/black">
+        android:layout_marginRight="8dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/emailHint"
-            android:inputType="textEmailAddress"
-            android:textColor="#000000" />
+            android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -56,15 +54,13 @@
         android:layout_below="@+id/loginEmailEdittext"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="8dp"
-        app:counterOverflowTextColor="@android:color/black">
+        android:layout_marginRight="8dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/passwordHint"
-            android:inputType="textPassword"
-            android:textColor="#000000" />
+            android:inputType="textPassword"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

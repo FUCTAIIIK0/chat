@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             mStatusDatabase.child("online").setValue("online");
 
         }else {
-            sendToStart();
+            //sendToStart();
         }
         // Check if user is signed in (non-null) and update UI accordingly.
 
