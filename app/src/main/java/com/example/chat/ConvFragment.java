@@ -1,9 +1,7 @@
 package com.example.chat;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
 
 
 public class ConvFragment extends Fragment {
@@ -70,7 +67,7 @@ public class ConvFragment extends Fragment {
         return mMainView;
     }
 
-        @Override
+    @Override
     public void onStart() {
         super.onStart();
         Query conversationQuery = mConvDatabase.orderByChild("timestamp");
@@ -90,15 +87,19 @@ public class ConvFragment extends Fragment {
                         String data = dataSnapshot.child("message").getValue().toString();
                         convViewHolder.setMessage(data, conv.isSeen());
                     }
+
                     @Override
                     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                     }
+
                     @Override
                     public void onChildRemoved(DataSnapshot dataSnapshot) {
                     }
+
                     @Override
                     public void onChildMoved(DataSnapshot dataSnapshot, String s) {
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                     }
@@ -112,7 +113,7 @@ public class ConvFragment extends Fragment {
 
                         convViewHolder.setName(userName);
                         convViewHolder.setUserImage(userThumb, getContext());
-                        convViewHolder.setOnlineStatus(onlineStatus,getContext());
+                        convViewHolder.setOnlineStatus(onlineStatus, getContext());
                         convViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -132,14 +133,16 @@ public class ConvFragment extends Fragment {
         };
         mConvList.setAdapter(firebaseConvAdapter);
     }
+
     public static class ConvViewHolder extends RecyclerView.ViewHolder {
         View mView;
+
         public ConvViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
         }
 
-        public void setMessage(String message, boolean isSeen){
+        public void setMessage(String message, boolean isSeen) {
             TextView userStatusView = (TextView) mView.findViewById(R.id.users_singleStatus);
             userStatusView.setText(message);
 /*            if(!isSeen){
@@ -152,26 +155,27 @@ public class ConvFragment extends Fragment {
 
             }*/
         }
-        public void setName(String name){
+
+        public void setName(String name) {
             TextView userNameView = (TextView) mView.findViewById(R.id.users_singleName);
             userNameView.setText(name);
         }
 
-        public void setUserImage(String thumb_image, Context ctx){
+        public void setUserImage(String thumb_image, Context ctx) {
             CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.users_singleImage);
             Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.userpic).into(userImageView);
         }
 
-        public void setOnlineStatus(String onlineStatus,Context ctx){
-            if (!onlineStatus.equals("online")){
+        public void setOnlineStatus(String onlineStatus, Context ctx) {
+            if (!onlineStatus.equals("online")) {
                 GetTimeAgo getTimeAgo = new GetTimeAgo();
                 Integer time = Integer.parseInt(onlineStatus);
 
-                String lastSeenTime = getTimeAgo.getTimeAgo(time,ctx);
+                String lastSeenTime = getTimeAgo.getTimeAgo(time, ctx);
 
                 TextView userOnlineStatus = mView.findViewById(R.id.users_onlineStatus);
                 userOnlineStatus.setText(lastSeenTime);
-            }else {
+            } else {
                 TextView userOnlineStatus = mView.findViewById(R.id.users_onlineStatus);
                 userOnlineStatus.setText(onlineStatus);
             }
@@ -180,7 +184,7 @@ public class ConvFragment extends Fragment {
 
         public void setUserOnline(String online_status) {
             ImageView userOnlineView = (ImageView) mView.findViewById(R.id.user_single_online_icon);
-            if(online_status.equals("online")){
+            if (online_status.equals("online")) {
                 userOnlineView.setVisibility(View.VISIBLE);
             } else {
                 userOnlineView.setVisibility(View.INVISIBLE);

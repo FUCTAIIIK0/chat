@@ -13,7 +13,7 @@ class SectionPagerAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 ConvFragment convFragment = new ConvFragment();
                 return convFragment;
@@ -24,7 +24,7 @@ class SectionPagerAdapter extends FragmentPagerAdapter {
                 FriendsFragment friendsFragment = new FriendsFragment();
                 return friendsFragment;
             default:
-                 return null;
+                return null;
         }
     }
 
@@ -33,8 +33,8 @@ class SectionPagerAdapter extends FragmentPagerAdapter {
         return 2;
     }
 
-    public CharSequence getPageTitle(int position){
-        switch (position){
+    public CharSequence getPageTitle(int position) {
+        switch (position) {
             case 0:
                 return "Conv";
             case 1:

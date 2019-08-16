@@ -1,16 +1,15 @@
 package com.example.chat;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -61,10 +60,10 @@ public class StatusActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             mProgress.dismiss();
-                            Intent settingsIntent = new Intent(StatusActivity.this,SettingsActivity.class);
+                            Intent settingsIntent = new Intent(StatusActivity.this, SettingsActivity.class);
                             startActivity(settingsIntent);
                         } else {
-                            Toast.makeText(getApplicationContext(),"There are some error in saving changes.",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "There are some error in saving changes.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

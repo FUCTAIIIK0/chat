@@ -2,13 +2,13 @@
 package com.example.chat;
 
 import android.icu.text.SimpleDateFormat;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,10 +19,11 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder>{
+public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
     private List<Messages> mMessageList;
     private FirebaseAuth mAuth;
     private DatabaseReference mUserDatabase;
@@ -35,10 +36,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.message_single_layout ,parent, false);
+                .inflate(R.layout.message_single_layout, parent, false);
 
         return new MessageViewHolder(v);
     }
+
     public class MessageViewHolder extends RecyclerView.ViewHolder {
         public TextView messageText;
         public TextView messageTime;
@@ -58,6 +60,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         }
     }
+
     @Override
     public void onBindViewHolder(final MessageViewHolder viewHolder, int i) {
         Messages c = mMessageList.get(i);
@@ -66,7 +69,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         String userid = c.getMessage();
         boolean seen = c.getSeen();
         //SeenStatus
-        if (seen){
+        if (seen) {
             viewHolder.messageSeen.setText("seen");
 
         } else {
@@ -90,6 +93,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 Picasso.with(viewHolder.profileImage.getContext()).load(image)
                         .placeholder(R.drawable.userpic).into(viewHolder.profileImage);
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -97,7 +101,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
 
         //Type of messages
-        if(message_type.equals("text")) {
+        if (message_type.equals("text")) {
             viewHolder.messageText.setText(c.getMessage());
             viewHolder.messageTime.setText(date);
             //viewHolder.profileImage.setVisibility(View.INVISIBLE);
@@ -107,10 +111,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                     .placeholder(R.drawable.userpic).into(viewHolder.profileImage);
         }
     }
-            @Override
-            public int getItemCount() {
-            return mMessageList.size();
-            }
+
+    @Override
+    public int getItemCount() {
+        return mMessageList.size();
+    }
 }
 
 

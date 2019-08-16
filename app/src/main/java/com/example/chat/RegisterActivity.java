@@ -1,12 +1,7 @@
 package com.example.chat;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,6 +9,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     //Firebase Auth
     private Button createAccountBtn;
-    private TextInputLayout regDisplayName,regEmail,regPassword;
+    private TextInputLayout regDisplayName, regEmail, regPassword;
     private Toolbar mToolbar;
     //ProgressDialog
     private ProgressDialog mRegProgress;
@@ -46,9 +45,9 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         //Layout
-            //Progress dialog
+        //Progress dialog
         mRegProgress = new ProgressDialog(this);
-            //Toolbar set
+        //Toolbar set
         mToolbar = findViewById(R.id.registerToolBar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Registration");
@@ -61,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
         regDisplayName.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyEvent.getAction() == KeyEvent.KEYCODE_ENTER))  {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyEvent.getAction() == KeyEvent.KEYCODE_ENTER)) {
                     return true;
                 }
                 return false;
@@ -70,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
         regEmail.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyEvent.getAction() == KeyEvent.KEYCODE_ENTER))  {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyEvent.getAction() == KeyEvent.KEYCODE_ENTER)) {
                     return true;
                 }
                 return false;
@@ -79,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
         regPassword.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyEvent.getAction() == KeyEvent.KEYCODE_ENTER))  {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (keyEvent.getAction() == KeyEvent.KEYCODE_ENTER)) {
                     return true;
                 }
                 return false;
@@ -88,18 +87,18 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         createAccountBtn = findViewById(R.id.createBtn);
-        createAccountBtn.setOnClickListener(new View.OnClickListener(){
+        createAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String displayName = regDisplayName.getEditText().getText().toString();
                 String email = regEmail.getEditText().getText().toString();
                 String pasword = regPassword.getEditText().getText().toString();
-                if (!TextUtils.isEmpty(displayName) || !TextUtils.isEmpty(email)|| !TextUtils.isEmpty(pasword)){
+                if (!TextUtils.isEmpty(displayName) || !TextUtils.isEmpty(email) || !TextUtils.isEmpty(pasword)) {
                     mRegProgress.setTitle("Registring User");
                     mRegProgress.setMessage("Please wait while we create account");
                     mRegProgress.setCanceledOnTouchOutside(false);
                     mRegProgress.show();
-                    registerUser(displayName,email,pasword);
+                    registerUser(displayName, email, pasword);
                 }
             }
         });
@@ -120,15 +119,15 @@ public class RegisterActivity extends AppCompatActivity {
 
                             HashMap<String, String> userMap = new HashMap<>();
                             userMap.put("name", displayName);
-                            userMap.put("status","Hi there ");
-                            userMap.put("online","default");
-                            userMap.put("image","default");
-                            userMap.put("thumb_image","default");
+                            userMap.put("status", "Hi there ");
+                            userMap.put("online", "default");
+                            userMap.put("image", "default");
+                            userMap.put("thumb_image", "default");
 
                             mDatabse.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
+                                    if (task.isSuccessful()) {
                                         mRegProgress.dismiss();
 
                                         // Sign in success, update UI with the signed-in user's information
@@ -143,7 +142,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-                    } else {
+                        } else {
                             mRegProgress.hide();
                             // If sign in fails, display a message to the user.
                             Log.w("Auth", "createUserWithEmail:failure", task.getException());

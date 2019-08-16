@@ -1,11 +1,5 @@
 package com.example.chat;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,6 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +38,7 @@ public class UsersActivity extends AppCompatActivity {
         setSupportActionBar(users_toolBar);
         getSupportActionBar().setTitle("Users Page");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        users_list =findViewById(R.id.users_list);
+        users_list = findViewById(R.id.users_list);
         users_list.setHasFixedSize(true);
         users_list.setLayoutManager(new LinearLayoutManager(this));
         //Database
@@ -62,7 +62,7 @@ public class UsersActivity extends AppCompatActivity {
             protected void populateViewHolder(UsersViewHolder usersViewHolder, Users users, int position) {
                 usersViewHolder.setName(users.getName());
                 usersViewHolder.setStatus(users.getStatus());
-                usersViewHolder.setOnlineStatus(users.getOnlineStatus(),UsersActivity.this);
+                usersViewHolder.setOnlineStatus(users.getOnlineStatus(), UsersActivity.this);
                 usersViewHolder.setUsersImage(users.getThumb_image(), getApplicationContext());
 
                 String user_id = getRef(position).getKey();
@@ -75,21 +75,22 @@ public class UsersActivity extends AppCompatActivity {
                         profiliIntent.putExtra("user_id",user_id);
                         startActivity(profiliIntent);*/
 
-                        CharSequence options[] = new CharSequence[]{"Open Profile","Send message"};
+                        CharSequence options[] = new CharSequence[]{"Open Profile", "Send message"};
                         AlertDialog.Builder builder = new AlertDialog.Builder(UsersActivity.this);
                         builder.setTitle("Select Options");
                         builder.setItems(options, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                if (i ==0){
-                                    Intent profiliIntent = new Intent(UsersActivity.this,ProfileActivity.class);
-                                    profiliIntent.putExtra("user_id",user_id);
+                                if (i == 0) {
+                                    Intent profiliIntent = new Intent(UsersActivity.this, ProfileActivity.class);
+                                    profiliIntent.putExtra("user_id", user_id);
                                     startActivity(profiliIntent);
                                 }
-                                if (i==1){
-                                    Intent chatIntent = new Intent(UsersActivity.this,ChatActivity.class);
-                                    chatIntent.putExtra("user_id",user_id);
-                                    startActivity(chatIntent);                                }
+                                if (i == 1) {
+                                    Intent chatIntent = new Intent(UsersActivity.this, ChatActivity.class);
+                                    chatIntent.putExtra("user_id", user_id);
+                                    startActivity(chatIntent);
+                                }
                             }
                         });
                         builder.show();
@@ -102,41 +103,46 @@ public class UsersActivity extends AppCompatActivity {
     }
 
 
-    public static class UsersViewHolder extends RecyclerView.ViewHolder{
+    public static class UsersViewHolder extends RecyclerView.ViewHolder {
         View mView;
+
         public UsersViewHolder(@NonNull View itemView) {
             super(itemView);
             mView = itemView;
         }
-        public void setName(String name){
+
+        public void setName(String name) {
             TextView userNameViev = mView.findViewById(R.id.users_singleName);
             userNameViev.setText(name);
         }
-        public void setStatus(String status){
+
+        public void setStatus(String status) {
             TextView userStatusViev = mView.findViewById(R.id.users_singleStatus);
             userStatusViev.setText(status);
         }
-        public void setOnlineStatus(String onlineStatus,Context ctx){
-            if (!onlineStatus.equals("online")){
+
+        public void setOnlineStatus(String onlineStatus, Context ctx) {
+            if (!onlineStatus.equals("online")) {
                 GetTimeAgo getTimeAgo = new GetTimeAgo();
                 Integer time = Integer.parseInt(onlineStatus);
 
-                String lastSeenTime = getTimeAgo.getTimeAgo(time,ctx);
+                String lastSeenTime = getTimeAgo.getTimeAgo(time, ctx);
                 TextView userOnlineStatus = mView.findViewById(R.id.users_onlineStatus);
                 userOnlineStatus.setText(lastSeenTime);
-            }else {
+            } else {
                 TextView userOnlineStatus = mView.findViewById(R.id.users_onlineStatus);
                 userOnlineStatus.setText(onlineStatus);
             }
 
         }
 
-        public void setUsersImage(String thumb_image, Context ctx){
+        public void setUsersImage(String thumb_image, Context ctx) {
             CircleImageView userImageView = mView.findViewById(R.id.users_singleImage);
             Picasso.with(ctx).load(thumb_image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.userpic).into(userImageView, new Callback() {
                 @Override
                 public void onSuccess() {
                 }
+
                 @Override
                 public void onError() {
                     Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.userpic).into(userImageView);

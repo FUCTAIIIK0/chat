@@ -1,14 +1,13 @@
 package com.example.chat;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,7 +19,7 @@ import com.squareup.picasso.Picasso;
 public class ProfileActivity extends AppCompatActivity {
     //Layout
     private ImageView profileImage;
-    private TextView profileDisplayName,profileStatus,profileTotalFriends,profileOnlineStatus;
+    private TextView profileDisplayName, profileStatus, profileTotalFriends, profileOnlineStatus;
     private Button profileSendReqBtn;
     //Database
     private DatabaseReference mUsersDatabase;
@@ -59,15 +58,14 @@ public class ProfileActivity extends AppCompatActivity {
                 String time = dataSnapshot.child("online").getValue().toString();
                 String lastSeenTime;
 
-                if (!time.equals("online")){
+                if (!time.equals("online")) {
                     //Convert to last seen view
                     Integer timeInteget = Integer.parseInt(time);
                     GetTimeAgo getTimeAgo = new GetTimeAgo();
-                    lastSeenTime = getTimeAgo.getTimeAgo(timeInteget,getApplicationContext());
-                }else {
-                     lastSeenTime = "online";
+                    lastSeenTime = getTimeAgo.getTimeAgo(timeInteget, getApplicationContext());
+                } else {
+                    lastSeenTime = "online";
                 }
-
 
 
                 profileDisplayName.setText(display_name);
@@ -84,7 +82,6 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
-
 
 
         //Temp
