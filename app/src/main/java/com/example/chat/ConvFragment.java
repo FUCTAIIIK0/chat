@@ -30,7 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 
-public class ChatsFragment extends Fragment {
+public class ConvFragment extends Fragment {
 
     private RecyclerView mConvList;
     private DatabaseReference mConvDatabase;
@@ -40,7 +40,7 @@ public class ChatsFragment extends Fragment {
     private String mCurrent_user_id;
     private View mMainView;
 
-    public ChatsFragment() {
+    public ConvFragment() {
         // Required empty public constructor
 
     }
@@ -70,11 +70,7 @@ public class ChatsFragment extends Fragment {
         return mMainView;
     }
 
-
-
-
-
-    @Override
+        @Override
     public void onStart() {
         super.onStart();
         Query conversationQuery = mConvDatabase.orderByChild("timestamp");
