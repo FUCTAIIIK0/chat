@@ -36,15 +36,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
         //Layout
-        loginToolbar = findViewById(R.id.loginToolBar);
         loginEmail = findViewById(R.id.login_Email);
         loginPassword = findViewById(R.id.login_Password);
         loginAccountBtn = findViewById(R.id.login_signinBtn);
         createAccountBtn = findViewById(R.id.login_createBtn);
-
-        setSupportActionBar(loginToolbar);
-        getSupportActionBar().setTitle("Login page");
-        mLoginProgress = new ProgressDialog(this);
 
         loginEmail.setOnKeyListener(new View.OnKeyListener() {
             @Override
