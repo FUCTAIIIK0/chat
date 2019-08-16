@@ -60,16 +60,20 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         //Layout
         mChatToolbar = findViewById(R.id.chat_appBar);
-        setSupportActionBar(mChatToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(" ");
-
         chatImage = findViewById(R.id.chat_userImage);
         name = findViewById(R.id.chat_displayName);
         online = findViewById(R.id.chat_onlineStatus);
         chatAddBtn = findViewById(R.id.chat_addBtn);
         chatSendBtn = findViewById(R.id.chatSendBtn);
         chatMessage = findViewById(R.id.chat_editText);
+        chatImage = findViewById(R.id.chat_userImage);
+        mMessagesList = findViewById(R.id.chat_messages_list);
+
+
+
+        setSupportActionBar(mChatToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(" ");
 
         //Databse
         mChatUser = getIntent().getStringExtra("user_id");
@@ -100,7 +104,6 @@ public class ChatActivity extends AppCompatActivity {
                 String chat_user_name = dataSnapshot.child("name").getValue().toString();
                 name.setText(chat_user_name);
                 //set Image
-                chatImage = findViewById(R.id.chat_userImage);
                 String thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
                 Picasso.with(ChatActivity.this).load(thumb_image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.userpic).into(chatImage, new Callback() {
                     @Override
@@ -193,7 +196,6 @@ public class ChatActivity extends AppCompatActivity {
 
         mAdapter = new MessageAdapter(messagesList);
 
-        mMessagesList = findViewById(R.id.chat_messages_list);
         mLinearLayout = new LinearLayoutManager(this);
 
         mMessagesList.setHasFixedSize(true);

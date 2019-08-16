@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private Toolbar loginToolbar;
     private TextInputLayout loginEmail;
     private TextInputLayout loginPassword;
-    private Button loginAccountBtn;
+    private Button loginAccountBtn, createAccountBtn;
     private FirebaseAuth mAuth;
     private ProgressDialog mLoginProgress;
 
@@ -37,12 +37,14 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         //Layout
         loginToolbar = findViewById(R.id.loginToolBar);
+        loginEmail = findViewById(R.id.login_Email);
+        loginPassword = findViewById(R.id.login_Password);
+        loginAccountBtn = findViewById(R.id.login_signinBtn);
+        createAccountBtn = findViewById(R.id.login_createBtn);
+
         setSupportActionBar(loginToolbar);
         getSupportActionBar().setTitle("Login page");
         mLoginProgress = new ProgressDialog(this);
-
-
-        loginEmail = findViewById(R.id.loginEmailEdittext);
 
         loginEmail.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -55,9 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        loginPassword = findViewById(R.id.loginPassword);
 
-        loginAccountBtn = findViewById(R.id.createBtn);
         loginAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +74,13 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,
                             "Please enter email and password", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        createAccountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent regIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(regIntent);
             }
         });
     }

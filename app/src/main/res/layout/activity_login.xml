@@ -18,7 +18,7 @@
         android:layout_marginRight="0dp" />
 
     <TextView
-        android:id="@+id/loginText"
+        android:id="@+id/login_Text"
         android:layout_width="wrap_content"
         android:layout_height="54dp"
         android:layout_alignParentStart="true"
@@ -33,10 +33,10 @@
         android:visibility="invisible" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loginEmailEdittext"
+        android:id="@+id/login_Email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/loginText"
+        android:layout_below="@+id/login_Text"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="8dp">
@@ -50,10 +50,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loginPassword"
+        android:id="@+id/login_Password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/loginEmailEdittext"
+        android:layout_below="@+id/login_Email"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="8dp">
@@ -67,23 +67,24 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/createBtn"
+        android:id="@+id/login_signinBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/loginPassword"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/loginBtn" />
-    <Button
-        android:id="@+id/createBtn1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/loginPassword"
+        android:layout_below="@+id/login_Password"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:text="@string/loginBtn" />
 
+    <Button
+        android:id="@+id/login_createBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_Password"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="22dp"
+        android:text="Create"
+        android:visibility="visible" />
 
 </RelativeLayout>
