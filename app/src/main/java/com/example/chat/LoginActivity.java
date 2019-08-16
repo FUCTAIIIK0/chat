@@ -23,7 +23,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 public class LoginActivity extends AppCompatActivity {
-    private Toolbar loginToolbar;
     private TextInputLayout loginEmail;
     private TextInputLayout loginPassword;
     private Button loginAccountBtn, createAccountBtn;
@@ -41,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         loginAccountBtn = findViewById(R.id.login_signinBtn);
         createAccountBtn = findViewById(R.id.login_createBtn);
 
+        mLoginProgress = new ProgressDialog(this);
+
         loginEmail.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -50,9 +51,6 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-
-
         loginAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -42,21 +42,15 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        mAuth = FirebaseAuth.getInstance();
-
         //Layout
-        //Progress dialog
-        mRegProgress = new ProgressDialog(this);
-        //Toolbar set
-        mToolbar = findViewById(R.id.registerToolBar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Registration");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         regDisplayName = findViewById(R.id.regDisplayName);
         regEmail = findViewById(R.id.regEmailEdittext);
         regPassword = findViewById(R.id.regPassword);
+        createAccountBtn = findViewById(R.id.createBtn);
 
+        mAuth = FirebaseAuth.getInstance();
+
+        mRegProgress = new ProgressDialog(this);
         regDisplayName.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -86,7 +80,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
 
-        createAccountBtn = findViewById(R.id.createBtn);
         createAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
