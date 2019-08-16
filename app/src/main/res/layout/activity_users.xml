@@ -4,9 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_background_dark"
     tools:context=".UsersActivity">
 
-    <include layout="@layout/app_bar_layout" android:id="@+id/usersAppBar"></include>
+    <include
+        android:id="@+id/usersAppBar"
+        layout="@layout/app_bar_layout"></include>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/users_list"
