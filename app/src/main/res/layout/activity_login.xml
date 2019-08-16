@@ -20,26 +20,30 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/login_Email"
             android:layout_width="match_parent"
-            android:layout_height="62dp">
+            android:layout_height="62dp"
+            android:layout_marginTop="12dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/emailHint"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textColor="@android:color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/login_Password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/passwordHint"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textColor="@android:color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,15 +51,25 @@
             android:id="@+id/login_signinBtn"
             android:layout_width="match_parent"
             android:layout_height="62dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/button_blue"
             android:baselineAligned="false"
             android:elevation="4dp"
-            android:text="Login" />
+            android:text="Sign in"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/login_createBtn"
             android:layout_width="match_parent"
             android:layout_height="62dp"
-            android:text="Create" />
+            android:layout_marginTop="12dp"
+            android:background="@drawable/button_trancent"
+            android:text="Create"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

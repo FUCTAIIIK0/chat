@@ -16,9 +16,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileActivity extends AppCompatActivity {
     //Layout
-    private ImageView profileImage;
+    private CircleImageView profileImage;
     private TextView profileDisplayName, profileStatus, profileTotalFriends, profileOnlineStatus;
     private Button profileSendReqBtn;
     //Database
@@ -34,7 +36,6 @@ public class ProfileActivity extends AppCompatActivity {
         profileDisplayName = findViewById(R.id.profile_displayName);
         profileStatus = findViewById(R.id.profile_status);
         profileImage = findViewById(R.id.profile_image);
-        profileTotalFriends = findViewById(R.id.profile_totalFriends);
         profileSendReqBtn = findViewById(R.id.profile_send_req_btn);
         profileOnlineStatus = findViewById(R.id.profile_onlineStatus);
 
