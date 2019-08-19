@@ -74,6 +74,6 @@ public class StatusActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.status_appBar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Account Status");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }

@@ -72,7 +72,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
         setSupportActionBar(mChatToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(" ");
 
         //Databse

@@ -37,7 +37,7 @@ public class UsersActivity extends AppCompatActivity {
         users_toolBar = findViewById(R.id.usersAppBar);
         setSupportActionBar(users_toolBar);
         getSupportActionBar().setTitle("Users Page");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         users_list = findViewById(R.id.users_list);
         users_list.setHasFixedSize(true);
         users_list.setLayoutManager(new LinearLayoutManager(this));
